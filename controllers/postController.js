@@ -3,7 +3,19 @@ const posts = require("../data/postData");
 
 // index
 function index(req, res) {
-    res.json(posts)
+
+    // posts filtrato è uguale ai posts iniziali
+    let filteredPosts = posts;
+
+    // se la richiesta contiene un filtro, allora filtriamo i post per tag
+    if (req.query.tags) {
+        filteredPosts = posts.filter(
+            post => post.tags.some(tag => tag.toLowerCase() === req.query.tags.toLowerCase())
+        );
+    }    
+
+    // restituiamo la variabile filteredPosts che potrebbe essere stata filtrata o contenere i posts originali    
+    res.json(filteredPosts);    
 }
 
 // show
@@ -70,13 +82,13 @@ function destroy(req, res) {
 
     // Rimuoviamo il post dalla pagina
     posts.splice(posts.indexOf(post), 1);
-    
+
     // Restituiamo lo status corretto
     res.sendStatus(204)
 
     // log di riscontro
     console.log(posts);
-    
+
 }
 
 // esporto tutto
