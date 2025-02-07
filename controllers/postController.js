@@ -72,7 +72,37 @@ function store(req, res) {
 
 // update
 function update(req, res) {
-    res.send('Modifica integrale del post' + req.params.id);
+
+    // recupero l'id dall' URL e trasformiamolo in numero
+    const id = parseInt(req.params.id)
+
+    // cerco il post tramite id
+    const post = posts.find(post => post.id === id);
+
+    // faccio il controllo
+    if (!post) {
+
+        // imposto lo status 404
+        res.status(404)
+
+        // restituisco un JSON con le altre informazioni
+        return res.json({
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    }
+
+    // aggiorno i valori
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;  
+
+    // log del menu
+    console.log(posts);
+
+    // restituisco il post appena aggiornato
+    res.json(post)
 }
 
 // modify
