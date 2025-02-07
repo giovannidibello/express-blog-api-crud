@@ -1,4 +1,5 @@
 // importo l'array dei post
+const { title } = require("process");
 const posts = require("../data/postData");
 
 // index
@@ -12,10 +13,10 @@ function index(req, res) {
         filteredPosts = posts.filter(
             post => post.tags.some(tag => tag.toLowerCase() === req.query.tags.toLowerCase())
         );
-    }    
+    }
 
     // restituiamo la variabile filteredPosts che potrebbe essere stata filtrata o contenere i posts originali    
-    res.json(filteredPosts);    
+    res.json(filteredPosts);
 }
 
 // show
@@ -45,8 +46,28 @@ function show(req, res) {
 
 // store
 function store(req, res) {
-    res.send('Creazione nuovo post');
-    console.log(req.body);    
+
+    // creo un nuovo id incrementando l'ultimo id presente
+    const newId = posts[posts.length - 1].id + 1;
+
+    // creo un nuovo oggetto post
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    // aggiungo il nuovo post ai posts
+    posts.push(newPost);
+
+    // controllo
+    console.log(posts);
+
+    // restituisco lo status corretto e il post appena creato
+    res.status(201);
+    res.json(newPost);
 }
 
 // update
