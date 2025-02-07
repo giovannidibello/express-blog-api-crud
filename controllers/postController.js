@@ -46,6 +46,7 @@ function show(req, res) {
 // store
 function store(req, res) {
     res.send('Creazione nuovo post');
+    console.log(req.body);    
 }
 
 // update

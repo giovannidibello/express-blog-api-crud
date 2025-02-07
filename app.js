@@ -9,6 +9,9 @@ const postsRouter = require('./routers/postRouter');
 // middleware file statici cartella public
 app.use(express.static('public'));
 
+// registro il body-parser
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send("Server del mio blog")
 })
