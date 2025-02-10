@@ -5,6 +5,9 @@ const posts = require("../data/postData");
 // index
 function index(req, res) {
 
+    // // inseriamo un errore
+    // throw new Error("Errore di test");
+
     // posts filtrato è uguale ai posts iniziali
     let filteredPosts = posts;
 
@@ -96,7 +99,7 @@ function update(req, res) {
     post.title = req.body.title;
     post.content = req.body.content;
     post.image = req.body.image;
-    post.tags = req.body.tags;  
+    post.tags = req.body.tags;
 
     // log del menu
     console.log(posts);

@@ -5,6 +5,7 @@ const port = 3000;
 
 // importo il file delle rotte
 const postsRouter = require('./routers/postRouter');
+const errorsHandler = require('./middlewares/errorsHandler');
 
 // middleware file statici cartella public
 app.use(express.static('public'));
@@ -18,6 +19,12 @@ app.get('/', (req, res) => {
 
 // richiamo il file delle rotte
 app.use("/posts", postsRouter)
+
+// // test errore
+// dsadasda;
+
+// registro il middleware degli errori
+app.use(errorsHandler);
 
 
 app.listen(port, () => {
