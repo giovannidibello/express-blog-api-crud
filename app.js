@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require("cors");
 
 // importo il file delle rotte
 const postsRouter = require('./routers/postRouter');
@@ -12,6 +13,9 @@ const notFound = require('./middlewares/notFound');
 
 // middleware file statici cartella public
 app.use(express.static('public'));
+
+// middleware CORS
+app.use(cors());
 
 // registro il body-parser
 app.use(express.json());
