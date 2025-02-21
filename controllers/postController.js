@@ -50,8 +50,8 @@ function show(req, res) {
 // store
 function store(req, res) {
 
-    // creo un nuovo id incrementando l'ultimo id presente
-    const newId = posts[posts.length - 1].id + 1;
+    // creo un nuovo id incrementando l'ultimo id presente se non ci sono post assegno 1
+    const newId = posts.length === 0 ? 1 : posts[posts.length - 1].id + 1;
 
     // creo un nuovo oggetto post
     const newPost = {
